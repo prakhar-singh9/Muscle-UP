@@ -1,0 +1,247 @@
+---
+name: Kinetic Precision
+colors:
+  surface: '#f8f9ff'
+  surface-dim: '#cbdbf5'
+  surface-bright: '#f8f9ff'
+  surface-container-lowest: '#ffffff'
+  surface-container-low: '#eff4ff'
+  surface-container: '#e5eeff'
+  surface-container-high: '#dce9ff'
+  surface-container-highest: '#d3e4fe'
+  on-surface: '#0b1c30'
+  on-surface-variant: '#424938'
+  inverse-surface: '#213145'
+  inverse-on-surface: '#eaf1ff'
+  outline: '#727a66'
+  outline-variant: '#c2cab2'
+  surface-tint: '#3f6a00'
+  primary: '#3f6a00'
+  on-primary: '#ffffff'
+  primary-container: '#65a30d'
+  on-primary-container: '#1b3100'
+  inverse-primary: '#96d947'
+  secondary: '#565e74'
+  on-secondary: '#ffffff'
+  secondary-container: '#dae2fd'
+  on-secondary-container: '#5c647a'
+  tertiary: '#446900'
+  on-tertiary: '#ffffff'
+  tertiary-container: '#6ca200'
+  on-tertiary-container: '#1e3100'
+  error: '#ba1a1a'
+  on-error: '#ffffff'
+  error-container: '#ffdad6'
+  on-error-container: '#93000a'
+  primary-fixed: '#b1f661'
+  primary-fixed-dim: '#96d947'
+  on-primary-fixed: '#0f2000'
+  on-primary-fixed-variant: '#2e4f00'
+  secondary-fixed: '#dae2fd'
+  secondary-fixed-dim: '#bec6e0'
+  on-secondary-fixed: '#131b2e'
+  on-secondary-fixed-variant: '#3f465c'
+  tertiary-fixed: '#b2f746'
+  tertiary-fixed-dim: '#98da27'
+  on-tertiary-fixed: '#121f00'
+  on-tertiary-fixed-variant: '#334f00'
+  background: '#f8f9ff'
+  on-background: '#0b1c30'
+  surface-variant: '#d3e4fe'
+typography:
+  display-lg:
+    fontFamily: Plus Jakarta Sans
+    fontSize: 36px
+    fontWeight: '800'
+    lineHeight: 44px
+    letterSpacing: -0.025em
+  display-lg-mobile:
+    fontFamily: Plus Jakarta Sans
+    fontSize: 28px
+    fontWeight: '800'
+    lineHeight: 36px
+    letterSpacing: -0.02em
+  headline-xl:
+    fontFamily: Plus Jakarta Sans
+    fontSize: 28px
+    fontWeight: '700'
+    lineHeight: 36px
+    letterSpacing: -0.02em
+  headline-lg:
+    fontFamily: Plus Jakarta Sans
+    fontSize: 22px
+    fontWeight: '700'
+    lineHeight: 30px
+    letterSpacing: -0.015em
+  headline-md:
+    fontFamily: Plus Jakarta Sans
+    fontSize: 18px
+    fontWeight: '600'
+    lineHeight: 26px
+    letterSpacing: -0.01em
+  headline-sm:
+    fontFamily: Plus Jakarta Sans
+    fontSize: 15px
+    fontWeight: '600'
+    lineHeight: 22px
+    letterSpacing: '0'
+  body-lg:
+    fontFamily: Inter
+    fontSize: 16px
+    fontWeight: '400'
+    lineHeight: 24px
+    letterSpacing: -0.005em
+  body-md:
+    fontFamily: Inter
+    fontSize: 14px
+    fontWeight: '400'
+    lineHeight: 20px
+    letterSpacing: '0'
+  body-sm:
+    fontFamily: Inter
+    fontSize: 12px
+    fontWeight: '400'
+    lineHeight: 16px
+    letterSpacing: 0.005em
+  label-lg:
+    fontFamily: Inter
+    fontSize: 14px
+    fontWeight: '600'
+    lineHeight: 20px
+    letterSpacing: 0.01em
+  label-md:
+    fontFamily: Inter
+    fontSize: 12px
+    fontWeight: '600'
+    lineHeight: 16px
+    letterSpacing: 0.02em
+  label-sm:
+    fontFamily: Inter
+    fontSize: 11px
+    fontWeight: '700'
+    lineHeight: 14px
+    letterSpacing: 0.05em
+  numeric-stat:
+    fontFamily: Plus Jakarta Sans
+    fontSize: 30px
+    fontWeight: '800'
+    lineHeight: 36px
+    letterSpacing: -0.03em
+  numeric-data:
+    fontFamily: Inter
+    fontSize: 13px
+    fontWeight: '600'
+    lineHeight: 18px
+    letterSpacing: '0'
+rounded:
+  sm: 0.125rem
+  DEFAULT: 0.25rem
+  md: 0.375rem
+  lg: 0.5rem
+  xl: 0.75rem
+  full: 9999px
+spacing:
+  gutter: 1.5rem
+  gutter-compact: 0.75rem
+  margin: 2rem
+  margin-mobile: 1rem
+  space-xs: 0.25rem
+  space-sm: 0.5rem
+  space-md: 1rem
+  space-lg: 1.5rem
+  space-xl: 2.5rem
+---
+
+## Brand & Style
+
+This design system establishes an ultra-refined, high-performance administrative environment engineered specifically for commercial gym operations, fitness studio franchises, and front-desk personnel. 
+
+### Aesthetic Philosophy
+The system merges modern high-density B2B SaaS architecture with athletic precision. It avoids the tired tropes of aggressive dark-mode neon bodybuilding apps and unoptimized consumer fitness tracking. Instead, it treats gym management as an enterprise discipline requiring rapid operational throughput: check-ins, subscription renewals, automated billing, personal trainer booking schedules, and capacity telemetry.
+
+Key visual principles:
+- **Athletic Kinetic Utility:** Electric lime serves not as decoration, but as high-visibility operational triggers—focal interaction points, successful state transactions, and critical forward actions.
+- **Architectural Contrast:** A deep slate navigation spine grounds administrative focus, cleanly delineating core system architecture from dynamic light workspace canvases.
+- **Data Denseness & Clarity:** Information hierarchy is calibrated for split-second front-desk scanning, using tabular numeric treatments for Indian Rupee (`₹`) transactions, ISO timestamps, and membership identification barcodes.
+- **Functional Polish:** Subdued light borders, pure white container cards, and controlled elevation provide an impeccably clean, distraction-free environment that prioritizes speed and accuracy over ornamentation.
+
+## Colors
+
+The color system enforces a sharp structural contrast between static structural shells and tactical administrative content.
+
+### Palette Roles
+- **Primary Accent (`#65A30D` / `#84CC16` / `#A3E635`):** Reserved for primary conversion pathways, active membership toggles, check-in confirmations, and primary buttons. Use `#65A30D` for high-contrast interactive text and accessible button surfaces on light backgrounds; use electric lime (`#A3E635`) for glowing active states, dark-sidebar accents, and status badges.
+- **Deep Structural Sidebar (`#0F172A` / `#111827`):** The persistent navigation bar relies on midnight slate, housing crisp gray-to-white icons, high-visibility badges, and precise divider rules (`#1E293B`).
+- **Workspace Surfaces (`#F8FAFC` / `#F1F5F9` / `#FFFFFF`):** The primary view canvas operates on `#F8FAFC`. Elevated content modules, data tables, and input card groups sit on pure `#FFFFFF` bounded by fine hairline borders (`#E2E8F0`).
+- **Semantic Status Architecture:**
+  - **Active / Verified / Paid:** Emerald (`#10B981` surface tint `#ECFDF5`, border `#A7F3D0`).
+  - **Expiring Soon / Pending / Action Required:** Amber (`#F59E0B` surface tint `#FFFBEB`, border `#FDE68A`).
+  - **Expired / Overdue / Terminated:** Rose (`#EF4444` surface tint `#FEF2F2`, border `#FECACA`).
+  - **Info / Neutral Stat:** Slate (`#64748B` surface tint `#F8FAFC`, border `#E2E8F0`).
+
+## Typography
+
+Typography balances executive geometric presence (`Plus Jakarta Sans`) with pragmatic administrative reading efficiency (`Inter`).
+
+### Data & Numeric Rules
+- All numeric output representing currency (`₹` / INR), check-in counts, timestamps, phone numbers, and Member IDs must enforce `font-feature-settings: "tnum" 1, "cv05" 1`. This guarantees strict vertical alignment across billing ledgers and member tables.
+- Display numbers on KPI cards (`numeric-stat`) feature tightened tracking to preserve horizontal space when displaying large financial sums (e.g., `₹12,48,500`).
+- Micro-labels (`label-sm`) on table column headers and status indicators utilize uppercase letter spacing (`letterSpacing: 0.05em`) paired with bold weights for rapid scanning.
+
+## Layout & Spacing
+
+The administrative architecture utilizes an asymmetric fixed-fluid layout engineered for desktop workstations while remaining completely responsive on tablets and check-in kiosks.
+
+### Spatial Architecture
+- **Sidebar Shell:** Fixed 260px desktop width (collapsible to 72px icon rail on screens `< 1280px`). Remains pinned with independent vertical scrolling.
+- **Top Utility Bar:** Fixed 64px height providing global gym branch switcher, instant quick-actions (+ Member, Check-in scanner modal), and front-desk profile controls.
+- **Main Canvas:** Fluid workspace bounded by standard `margin` (32px) and a maximum content constrain of 1600px for large-format administrative displays.
+- **Grid Cadence:** Primary 12-column responsive fluid grid with 24px `gutter`. Metric counters default to a 4-column span on desktop, 2-column on tablet, and single-column stack on mobile viewports.
+- **Density Controls:** High-density UI layouts (such as daily member attendance rosters) collapse internal item padding to `space-sm` (8px) and cell height to 44px, maximizing visible rows per display without pagination friction.
+
+## Elevation & Depth
+
+This design system avoids heavy shadows, blur treatments, and multi-layered glass distortions. Elevation is utilitarian and low-depth to ensure data readability under harsh gym front-desk lighting conditions.
+
+### Elevation Hierarchy
+- **Level 0 (Base Canvas):** `#F8FAFC` flat surface. No shadow.
+- **Level 1 (Card & Content Blocks):** `#FFFFFF` surfaces with a 1px structural outline (`#E2E8F0`) and an ambient, low-profile resting shadow: `0 1px 3px 0 rgba(15, 23, 42, 0.05), 0 1px 2px -1px rgba(15, 23, 42, 0.05)`.
+- **Level 2 (Interactive Hover & Dropdown Menus):** Applied to active rows, search popovers, and contextual action menus: `0 4px 6px -1px rgba(15, 23, 42, 0.07), 0 2px 4px -2px rgba(15, 23, 42, 0.05)`, with border tint deepening to `#CBD5E1`.
+- **Level 3 (Modals & Slide-over Sheets):** Check-in search consoles, member profile slide-overs, and payment receipts: `0 20px 25px -5px rgba(15, 23, 42, 0.12), 0 8px 10px -6px rgba(15, 23, 42, 0.06)` accompanied by a slate backdrop scrim (`#0F172A` at 60% opacity).
+
+## Shapes
+
+The interface adopts a disciplined, crisp architectural geometry (`roundedness: 1`). Soft curves (4px to 8px) prevent an overly playful consumer aesthetic while eliminating harsh raw brutalism, maintaining industrial B2B software rigor.
+
+### Radius Assignments
+- **Controls & Inputs (`rounded` / 4px):** Text fields, search bars, table action buttons, and segmented switch items.
+- **Cards & Data Containers (`rounded-lg` / 8px):** Metric summary blocks, data grid containers, modal dialogues, and alert banners.
+- **Badges & Micro Status Indicators (`rounded-full` / 9999px):** Status chips, member presence dots, notification pills, and avatar fallbacks utilize fully curved capsules to contrast sharply against rectilinear data rows.
+
+## Components
+
+### Buttons
+- **Primary CTA:** Athletic lime `#65A30D` (or `#84CC16` on dark surfaces) with bold slate-950 `#022C22` or white text, 8px border radius, 36px standard height (`space-sm` vertical, `space-md` horizontal padding). Active state triggers a subtle 1px inset scale.
+- **Secondary Action:** Crisp white `#FFFFFF` surface with `#E2E8F0` border, slate-800 text `#1E293B`. Hover shifts surface to `#F8FAFC` and border to `#CBD5E1`.
+- **Destructive:** Light rose tint `#FEF2F2` with `#DC2626` text and border; transitions to solid `#DC2626` on confirmation steps.
+
+### Status Chips & Badges
+- Strict capsule profile (`rounded-full`) with a fixed height of 22px and tabular text (`label-sm`).
+- **Active / Paid:** `#ECFDF5` background, `#059669` text, `#A7F3D0` border.
+- **Expiring Soon:** `#FFFBEB` background, `#D97706` text, `#FDE68A` border.
+- **Expired / Unpaid:** `#FEF2F2` background, `#DC2626` text, `#FECACA` border.
+
+### Data Tables
+- Header cells: 36px height, uppercase slate-500 typography (`label-sm`), background `#F8FAFC`, border-bottom 1px solid `#E2E8F0`.
+- Body rows: 48px height, alternating white surfaces, with a hover transition to `#F8FAFC`. All numeric columns (IDs, Phone, Plan Duration, Price) must be right-aligned with tabular numerals enabled.
+- Actions column: Fixed to the right edge with ghost action buttons (Edit, Renew, Check In) appearing on row hover.
+
+### Form Inputs & Search Fields
+- 38px standard height, white background, `#CBD5E1` border, 4px corner radius.
+- Focus state: Replaces default browser outline with a crisp 1px ring in `#84CC16` accompanied by an ambient `#84CC16` box-shadow at 15% opacity.
+- Required indicators use a subtle `#EF4444` asterisk positioned after the field title.
+- Currency fields (`₹`) include a fixed left-prefix container with `#F1F5F9` background and `#64748B` label text.
+
+### Stat Cards (KPIs)
+- Bordered pure white containers (`rounded-lg`, border `#E2E8F0`).
+- Structure: Top row contains metadata label in muted uppercase slate alongside a contextual trend pill (+14% vs last mo); main body features `numeric-stat` styling (`₹8,42,000` or `1,248 Members`); footer row displays secondary operational text in `body-sm`.

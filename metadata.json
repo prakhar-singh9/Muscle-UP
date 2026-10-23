@@ -1,0 +1,6 @@
+{
+  "name": "MuscleUp - Gym Operations & Front Desk Suite",
+  "description": "Enterprise gym management and front-desk reception operations suite featuring member rosters, turnstile attendance telemetry, UPI QR billing, and renewal workflows.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
