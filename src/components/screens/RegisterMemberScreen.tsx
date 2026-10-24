@@ -193,6 +193,8 @@ export const RegisterMemberScreen: React.FC = () => {
         </div>
       </div>
 
+      {saveError && <div role="alert" className="bg-rose-50 border border-rose-200 text-rose-700 rounded-lg p-3 text-sm">{saveError}</div>}
+
       {/* Form Content: Left 3-Steps (8 cols) + Right Card & Checklist (4 cols) */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         {/* Left Form (7-8 cols) */}
@@ -735,14 +737,14 @@ export const RegisterMemberScreen: React.FC = () => {
 
         <div className="flex items-center gap-3 w-full sm:w-auto">
           <button
-            onClick={() => handleSave(true)}
+            onClick={() => handleSave(true)} disabled={isSaving}
             className="flex-1 sm:flex-none px-5 py-2.5 bg-white hover:bg-slate-50 border border-slate-300 rounded text-xs font-bold text-slate-800 shadow-2xs flex items-center justify-center gap-2 transition-colors"
           >
             <CreditCard className="w-3.5 h-3.5 text-slate-600" />
             <span>Save &amp; Record Payment</span>
           </button>
           <button
-            onClick={() => handleSave(false)}
+            onClick={() => handleSave(false)} disabled={isSaving}
             className="flex-1 sm:flex-none px-6 py-2.5 bg-[#65a30d] hover:bg-[#558b09] active:scale-[0.99] text-white text-xs font-bold rounded shadow-sm flex items-center justify-center gap-2 transition-all"
           >
             <CheckCircle2 className="w-4 h-4" />
