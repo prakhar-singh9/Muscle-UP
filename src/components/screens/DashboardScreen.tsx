@@ -14,6 +14,7 @@ import {
   QrCode
 } from 'lucide-react';
 import { useGym } from '../../context/GymContext';
+import { isSupabaseConfigured } from '../../lib/supabase';
 
 export const DashboardScreen: React.FC = () => {
   const { 
@@ -30,6 +31,7 @@ export const DashboardScreen: React.FC = () => {
 
   const activeMembersCount = members.filter(m => m.status === 'active').length;
   const expiringCount = members.filter(m => m.status === 'expiring').length;
+  const liveDatabaseMode = isSupabaseConfigured;
 
   return (
     <div className="p-8 max-w-[1600px] mx-auto space-y-6">
@@ -43,7 +45,7 @@ export const DashboardScreen: React.FC = () => {
             Gym Floor Command Center
           </h1>
           <p className="text-xs text-slate-500">
-            Real-time biometric turnstile telemetry, financial throughput, and floor density metrics.
+            {liveDatabaseMode ? 'Database-backed member overview. Attendance, memberships, and payments will appear once those integrations are connected.' : 'Demo view: turnstile telemetry, financial throughput, and floor density metrics.'}
           </p>
         </div>
 
@@ -70,64 +72,64 @@ export const DashboardScreen: React.FC = () => {
         {/* Floor Load */}
         <div className="bg-white p-5 rounded-lg border border-slate-200 shadow-2xs">
           <div className="flex items-center justify-between text-xs font-bold text-slate-500 uppercase tracking-wider">
-            <span>Live Floor Occupancy</span>
+            <span>{liveDatabaseMode ? 'Live Floor Occupancy' : 'Live Floor Occupancy'}</span>
             <Activity className="w-4 h-4 text-[#65a30d]" />
           </div>
           <div className="text-3xl font-extrabold text-slate-900 mt-2 font-jakarta font-tnum">
-            {currentFloorLoad} <span className="text-base text-slate-400 font-normal">/ {maxFloorCap} Cap</span>
+            {liveDatabaseMode ? '—' : currentFloorLoad} <span className="text-base text-slate-400 font-normal">{liveDatabaseMode ? 'Not connected' : `/ ${maxFloorCap} Cap`}</span>
           </div>
           <div className="w-full bg-slate-100 rounded-full h-1.5 mt-3 overflow-hidden">
             <div 
               className="bg-[#65a30d] h-1.5 rounded-full"
-              style={{ width: `${(currentFloorLoad / maxFloorCap) * 100}%` }}
+              style={{ width: liveDatabaseMode ? '0%' : `${(currentFloorLoad / maxFloorCap) * 100}%` }}
             ></div>
           </div>
           <div className="mt-2 text-[11px] font-semibold text-slate-500 flex justify-between">
-            <span>Turnstile Gate 1 Online</span>
-            <span>{Math.round((currentFloorLoad / maxFloorCap) * 100)}% density</span>
+            <span>{liveDatabaseMode ? 'Turnstile integration not connected' : 'Turnstile Gate 1 Online'}</span>
+            <span>{liveDatabaseMode ? 'No live data' : `${Math.round((currentFloorLoad / maxFloorCap) * 100)}% density`}</span>
           </div>
         </div>
 
         {/* Today's Counter UPI */}
         <div className="bg-white p-5 rounded-lg border border-slate-200 shadow-2xs">
           <div className="flex items-center justify-between text-xs font-bold text-slate-500 uppercase tracking-wider">
-            <span>Today's Counter UPI</span>
+            <span>{liveDatabaseMode ? 'Today’s UPI Collections' : 'Today’s Counter UPI'}</span>
             <Wallet className="w-4 h-4 text-emerald-500" />
           </div>
           <div className="text-3xl font-extrabold text-slate-900 mt-2 font-jakarta font-tnum">
-            ₹{todayCounterUpi.toLocaleString('en-IN')}
+            {liveDatabaseMode ? 'Not available' : `₹${todayCounterUpi.toLocaleString('en-IN')}`}
           </div>
           <div className="mt-2 text-xs font-semibold text-emerald-600 flex items-center gap-1">
-            <ArrowUpRight className="w-3.5 h-3.5" />
-            <span>+18.4% vs yesterday</span>
+            {!liveDatabaseMode && <><ArrowUpRight className="w-3.5 h-3.5" /><span>+18.4% vs yesterday</span></>}
+            {liveDatabaseMode && <span className="text-slate-500">Payment records are not connected</span>}
           </div>
         </div>
 
         {/* Active Members */}
         <div className="bg-white p-5 rounded-lg border border-slate-200 shadow-2xs">
           <div className="flex items-center justify-between text-xs font-bold text-slate-500 uppercase tracking-wider">
-            <span>Active Enrolled Members</span>
+            <span>{liveDatabaseMode ? 'Registered Members' : 'Active Enrolled Members'}</span>
             <Users className="w-4 h-4 text-blue-500" />
           </div>
           <div className="text-3xl font-extrabold text-slate-900 mt-2 font-jakarta font-tnum">
-            {activeMembersCount}
+            {liveDatabaseMode ? members.length : activeMembersCount}
           </div>
           <div className="mt-2 text-xs font-semibold text-slate-500">
-            {todayJoinedCount} new joined today
+            {liveDatabaseMode ? 'Loaded from Supabase' : `${todayJoinedCount} new joined today`}
           </div>
         </div>
 
         {/* Expiring Soon */}
         <div className="bg-white p-5 rounded-lg border border-slate-200 shadow-2xs">
           <div className="flex items-center justify-between text-xs font-bold text-slate-500 uppercase tracking-wider">
-            <span>Expiring Within 7 Days</span>
+            <span>{liveDatabaseMode ? 'Memberships Expiring Soon' : 'Expiring Within 7 Days'}</span>
             <RotateCw className="w-4 h-4 text-amber-500" />
           </div>
           <div className="text-3xl font-extrabold text-amber-600 mt-2 font-jakarta font-tnum">
-            {expiringCount}
+            {liveDatabaseMode ? '—' : expiringCount}
           </div>
           <div className="mt-2 text-xs font-semibold text-amber-700">
-            ₹1,84,500 recoverable revenue
+            {liveDatabaseMode ? 'Membership records not connected' : '₹1,84,500 recoverable revenue'}
           </div>
         </div>
       </div>
@@ -145,12 +147,14 @@ export const DashboardScreen: React.FC = () => {
             </div>
             <span className="text-[11px] font-mono text-emerald-600 font-bold flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              Synchronized
+              {liveDatabaseMode ? 'No live feed' : 'Demo data'}
             </span>
           </div>
 
           <div className="divide-y divide-slate-100">
-            {attendanceLogs.slice(0, 6).map((log) => (
+            {liveDatabaseMode ? (
+              <div className="p-8 text-center text-sm text-slate-500">Attendance records are not connected to Supabase yet.</div>
+            ) : attendanceLogs.slice(0, 6).map((log) => (
               <div 
                 key={log.id} 
                 onClick={() => navigateToMember(log.memberId)}
@@ -207,7 +211,7 @@ export const DashboardScreen: React.FC = () => {
                 </div>
                 <div>
                   <div className="text-xs font-bold text-slate-900">Launch UPI Counter QR</div>
-                  <div className="text-[10px] text-slate-500">Scan standee terminal on desk</div>
+                  <div className="text-[10px] text-slate-500">{liveDatabaseMode ? 'Payment integration not connected' : 'Demo QR counter action'}</div>
                 </div>
               </div>
               <ArrowUpRight className="w-4 h-4 text-slate-400" />
@@ -223,7 +227,7 @@ export const DashboardScreen: React.FC = () => {
                 </div>
                 <div>
                   <div className="text-xs font-bold text-slate-900">Renew Membership Cycle</div>
-                  <div className="text-[10px] text-slate-500">Append access &amp; issue invoice</div>
+                  <div className="text-[10px] text-slate-500">{liveDatabaseMode ? 'Membership integration not connected' : 'Demo membership action'}</div>
                 </div>
               </div>
               <ArrowUpRight className="w-4 h-4 text-slate-400" />
@@ -239,7 +243,7 @@ export const DashboardScreen: React.FC = () => {
                 </div>
                 <div>
                   <div className="text-xs font-bold text-slate-900">Browse Full Member Roster</div>
-                  <div className="text-[10px] text-slate-500">1,248 enrolled records</div>
+                  <div className="text-[10px] text-slate-500">{liveDatabaseMode ? `${members.length} records loaded` : 'Demo roster'}</div>
                 </div>
               </div>
               <ArrowUpRight className="w-4 h-4 text-slate-400" />
