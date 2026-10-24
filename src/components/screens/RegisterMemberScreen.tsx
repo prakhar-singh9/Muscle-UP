@@ -24,7 +24,7 @@ import { Member } from '../../types';
 
 export const RegisterMemberScreen: React.FC = () => {
   const { 
-    addMember, 
+    registerMember, 
     setCurrentScreen, 
     navigateToMember, 
     currentFloorLoad, 
@@ -35,9 +35,9 @@ export const RegisterMemberScreen: React.FC = () => {
   } = useGym();
 
   // Form Fields matching screenshot
-  const [fullName, setFullName] = useState('Arjun Kapoor');
-  const [phone, setPhone] = useState('98765 43210');
-  const [email, setEmail] = useState('arjun.kapoor@example.com');
+  const [fullName, setFullName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
   const [dob, setDob] = useState('1994-08-14');
   const [gender, setGender] = useState<'Male' | 'Female' | 'Other' | 'Prefer not'>('Male');
 
@@ -62,7 +62,10 @@ export const RegisterMemberScreen: React.FC = () => {
 
   const checkedCount = Object.values(checklist).filter(Boolean).length;
 
-  const handleSave = (recordPaymentImmediately: boolean) => {
+  const [saveError, setSaveError] = useState('');
+  const [isSaving, setIsSaving] = useState(false);
+
+  const handleSave = async (recordPaymentImmediately: boolean) => {
     if (!fullName.trim()) {
       alert('Please enter member full name.');
       return;
@@ -71,7 +74,10 @@ export const RegisterMemberScreen: React.FC = () => {
     const price = membershipTier.includes('19,999') ? 19999 : 11500;
     const planNameClean = membershipTier.split('@')[0].trim();
 
-    const created = addMember({
+    setSaveError('');
+    setIsSaving(true);
+    try {
+    const created = await registerMember({
       name: fullName,
       phone: phone.startsWith('+91') ? phone : `+91 ${phone}`,
       email: email,
@@ -111,6 +117,11 @@ export const RegisterMemberScreen: React.FC = () => {
     }
 
     navigateToMember(created.id);
+    } catch (error) {
+      setSaveError(error instanceof Error ? error.message : 'Unable to save member. Please try again.');
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   return (
@@ -181,6 +192,8 @@ export const RegisterMemberScreen: React.FC = () => {
           <span>SMS/WA Sync Enabled</span>
         </div>
       </div>
+
+      {saveError && <div role="alert" className="bg-rose-50 border border-rose-200 text-rose-700 rounded-lg p-3 text-sm">{saveError}</div>}
 
       {/* Form Content: Left 3-Steps (8 cols) + Right Card & Checklist (4 cols) */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
@@ -724,14 +737,14 @@ export const RegisterMemberScreen: React.FC = () => {
 
         <div className="flex items-center gap-3 w-full sm:w-auto">
           <button
-            onClick={() => handleSave(true)}
+            onClick={() => handleSave(true)} disabled={isSaving}
             className="flex-1 sm:flex-none px-5 py-2.5 bg-white hover:bg-slate-50 border border-slate-300 rounded text-xs font-bold text-slate-800 shadow-2xs flex items-center justify-center gap-2 transition-colors"
           >
             <CreditCard className="w-3.5 h-3.5 text-slate-600" />
             <span>Save &amp; Record Payment</span>
           </button>
           <button
-            onClick={() => handleSave(false)}
+            onClick={() => handleSave(false)} disabled={isSaving}
             className="flex-1 sm:flex-none px-6 py-2.5 bg-[#65a30d] hover:bg-[#558b09] active:scale-[0.99] text-white text-xs font-bold rounded shadow-sm flex items-center justify-center gap-2 transition-all"
           >
             <CheckCircle2 className="w-4 h-4" />
