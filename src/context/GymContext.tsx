@@ -160,7 +160,7 @@ export const GymProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   // Save changes
   useEffect(() => {
-    localStorage.setItem('muscleup_members', JSON.stringify(members));
+    if (!isSupabaseConfigured) localStorage.setItem('muscleup_members', JSON.stringify(members));
   }, [members]);
 
   useEffect(() => {
