@@ -24,7 +24,7 @@ import { Member } from '../../types';
 
 export const RegisterMemberScreen: React.FC = () => {
   const { 
-    addMember, 
+    registerMember, 
     setCurrentScreen, 
     navigateToMember, 
     currentFloorLoad, 
@@ -35,9 +35,9 @@ export const RegisterMemberScreen: React.FC = () => {
   } = useGym();
 
   // Form Fields matching screenshot
-  const [fullName, setFullName] = useState('Arjun Kapoor');
-  const [phone, setPhone] = useState('98765 43210');
-  const [email, setEmail] = useState('arjun.kapoor@example.com');
+  const [fullName, setFullName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
   const [dob, setDob] = useState('1994-08-14');
   const [gender, setGender] = useState<'Male' | 'Female' | 'Other' | 'Prefer not'>('Male');
 
@@ -62,7 +62,10 @@ export const RegisterMemberScreen: React.FC = () => {
 
   const checkedCount = Object.values(checklist).filter(Boolean).length;
 
-  const handleSave = (recordPaymentImmediately: boolean) => {
+  const [saveError, setSaveError] = useState('');
+  const [isSaving, setIsSaving] = useState(false);
+
+  const handleSave = async (recordPaymentImmediately: boolean) => {
     if (!fullName.trim()) {
       alert('Please enter member full name.');
       return;
@@ -71,7 +74,10 @@ export const RegisterMemberScreen: React.FC = () => {
     const price = membershipTier.includes('19,999') ? 19999 : 11500;
     const planNameClean = membershipTier.split('@')[0].trim();
 
-    const created = addMember({
+    setSaveError('');
+    setIsSaving(true);
+    try {
+    const created = await registerMember({
       name: fullName,
       phone: phone.startsWith('+91') ? phone : `+91 ${phone}`,
       email: email,
@@ -111,6 +117,11 @@ export const RegisterMemberScreen: React.FC = () => {
     }
 
     navigateToMember(created.id);
+    } catch (error) {
+      setSaveError(error instanceof Error ? error.message : 'Unable to save member. Please try again.');
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   return (
