@@ -94,9 +94,38 @@ export const GymProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [globalSearch, setGlobalSearch] = useState<string>('');
 
   const [members, setMembers] = useState<Member[]>(() => {
+    if (isSupabaseConfigured) return [];
     const saved = localStorage.getItem('muscleup_members');
     return saved ? JSON.parse(saved) : INITIAL_MEMBERS;
   });
+
+  const mapDatabaseMember = (row: GymMemberRow): Member => {
+    const joined = new Date(row.created_at);
+    const joinedDate = Number.isNaN(joined.getTime()) ? 'Unknown' : joined.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+    const age = row.date_of_birth ? Math.max(0, Math.floor((Date.now() - new Date(row.date_of_birth).getTime()) / 31557600000)) : undefined;
+    return {
+      id: row.id, numericId: String(row.member_number), name: row.full_name, gender: row.gender,
+      phone: row.phone, email: row.email ?? '', dob: row.date_of_birth ?? undefined, age,
+      joinedDate, tenureString: '', status: 'expired', planTier: 'No membership', planName: 'No membership',
+      planPrice: 0, paymentMethod: 'Not recorded', paymentState: 'PENDING', expiryDate: 'No membership',
+      daysRemaining: 0, startDate: joinedDate, lockerNo: row.locker_number ?? undefined,
+      assignedTrainer: row.assigned_trainer ?? undefined, emergencyContact: {
+        name: row.emergency_contact_name ?? '', phone: row.emergency_contact_phone ?? '',
+        relationship: row.emergency_contact_relationship ?? undefined,
+      }, address: row.address ?? undefined, fitnessGoal: row.fitness_goal ?? undefined,
+      lifetimeVisits: 0, complianceRate: 0, preferredSlot: row.preferred_slot ?? 'Not set',
+      branch: row.branch, accessGranted: false, notes: row.notes ?? undefined,
+    };
+  };
+
+  useEffect(() => {
+    if (!isSupabaseConfigured) return;
+    let cancelled = false;
+    listGymMembers().then(rows => {
+      if (!cancelled) setMembers(rows.map(mapDatabaseMember));
+    }).catch(error => console.error('Unable to load gym members from Supabase:', error));
+    return () => { cancelled = true; };
+  }, []);
 
   const [renewals, setRenewals] = useState<RenewalRecord[]>(() => {
     const saved = localStorage.getItem('muscleup_renewals');
