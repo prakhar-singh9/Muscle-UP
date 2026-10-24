@@ -21,6 +21,7 @@ import {
 } from 'lucide-react';
 import { useGym } from '../../context/GymContext';
 import { Member } from '../../types';
+import { isSupabaseConfigured } from '../../lib/supabase';
 
 export const RegisterMemberScreen: React.FC = () => {
   const { 
@@ -103,7 +104,8 @@ export const RegisterMemberScreen: React.FC = () => {
       branch: currentBranch
     });
 
-    if (recordPaymentImmediately) {
+    if (recordPaymentImmediately && !isSupabaseConfigured) {
+      // This invoice is only a local demo; never imply a real payment in live mode.
       setActiveInvoiceData({
         invoiceNo: `INV-2024-${Math.floor(9000 + Math.random() * 999)}`,
         memberName: created.name,
@@ -114,6 +116,8 @@ export const RegisterMemberScreen: React.FC = () => {
         paymentMode: 'UPI - GPay',
         date: 'Today'
       });
+    } else if (recordPaymentImmediately && isSupabaseConfigured) {
+      alert('Member details saved. Membership activation, payment recording, and invoice generation are not connected yet.');
     }
 
     navigateToMember(created.id);
