@@ -21,6 +21,7 @@ import {
 } from 'lucide-react';
 import { useGym } from '../../context/GymContext';
 import { Member } from '../../types';
+import { isSupabaseConfigured } from '../../lib/supabase';
 
 export const RegisterMemberScreen: React.FC = () => {
   const { 
@@ -38,18 +39,18 @@ export const RegisterMemberScreen: React.FC = () => {
   const [fullName, setFullName] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
-  const [dob, setDob] = useState('1994-08-14');
+  const [dob, setDob] = useState('');
   const [gender, setGender] = useState<'Male' | 'Female' | 'Other' | 'Prefer not'>('Male');
 
-  const [address, setAddress] = useState('Flat 402, Skyline Residency, 12th Main Indiranagar, Bengaluru, PIN: 560038');
-  const [emergencyName, setEmergencyName] = useState('Kavita Kapoor (Spouse)');
-  const [emergencyPhone, setEmergencyPhone] = useState('98111 22334');
+  const [address, setAddress] = useState('');
+  const [emergencyName, setEmergencyName] = useState('');
+  const [emergencyPhone, setEmergencyPhone] = useState('');
 
-  const [joiningDate, setJoiningDate] = useState('27 Oct 2024');
-  const [membershipTier, setMembershipTier] = useState('Yearly Elite All-Access @ ₹19,999');
-  const [batchSlot, setBatchSlot] = useState('Evening Peak (05:00 PM – 09:30 PM)');
-  const [lockerAllocation, setLockerAllocation] = useState('Locker #102 (Middle Tier - RFID)');
-  const [fitnessGoal, setFitnessGoal] = useState('Goal: Hypertrophy & core stability. No cardiovascular limitations. PT requested for intake posture screening.');
+  const [joiningDate, setJoiningDate] = useState(new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' }));
+  const [membershipTier, setMembershipTier] = useState('No membership selected');
+  const [batchSlot, setBatchSlot] = useState('');
+  const [lockerAllocation, setLockerAllocation] = useState('');
+  const [fitnessGoal, setFitnessGoal] = useState('');
 
   // Checklist items
   const [checklist, setChecklist] = useState({
@@ -103,7 +104,8 @@ export const RegisterMemberScreen: React.FC = () => {
       branch: currentBranch
     });
 
-    if (recordPaymentImmediately) {
+    if (recordPaymentImmediately && !isSupabaseConfigured) {
+      // This invoice is only a local demo; never imply a real payment in live mode.
       setActiveInvoiceData({
         invoiceNo: `INV-2024-${Math.floor(9000 + Math.random() * 999)}`,
         memberName: created.name,
@@ -114,6 +116,8 @@ export const RegisterMemberScreen: React.FC = () => {
         paymentMode: 'UPI - GPay',
         date: 'Today'
       });
+    } else if (recordPaymentImmediately && isSupabaseConfigured) {
+      alert('Member details saved. Membership activation, payment recording, and invoice generation are not connected yet.');
     }
 
     navigateToMember(created.id);
@@ -180,16 +184,16 @@ export const RegisterMemberScreen: React.FC = () => {
           </div>
           <div>
             <div className="font-bold text-slate-900 font-jakarta">
-              Staff Tip: WhatsApp Gateway Active
+              {isSupabaseConfigured ? 'Messaging integration not connected' : 'Staff Tip: Demo messaging status'}
             </div>
             <p className="text-slate-600 mt-0.5 leading-snug">
-              Verify Indian mobile number for automated WhatsApp expiry reminders, welcome PDF locker pin, and tax invoice generation.
+              {isSupabaseConfigured ? 'WhatsApp/SMS reminders, welcome messages, and tax invoice delivery are not connected yet. No messages will be sent from this form.' : 'This is demo UI only. No real WhatsApp/SMS messages are sent.'}
             </p>
           </div>
         </div>
         <div className="shrink-0 flex items-center gap-1.5 text-[#65a30d] font-bold bg-white px-3 py-1 rounded-full border border-lime-200 shadow-2xs">
           <span>✓</span>
-          <span>SMS/WA Sync Enabled</span>
+          <span>{isSupabaseConfigured ? 'Not connected' : 'Demo only'}</span>
         </div>
       </div>
 
