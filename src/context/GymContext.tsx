@@ -8,6 +8,8 @@ import {
   AttendanceRecord, 
   MessageLog 
 } from '../types';
+import { isSupabaseConfigured } from '../lib/supabase';
+import { listGymMembers, createGymMember, GymMemberRow } from '../lib/gymData';
 import { 
   INITIAL_MEMBERS, 
   INITIAL_PAYMENTS, 
