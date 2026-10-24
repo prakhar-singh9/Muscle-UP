@@ -46,7 +46,7 @@ export const RegisterMemberScreen: React.FC = () => {
   const [emergencyPhone, setEmergencyPhone] = useState('');
 
   const [joiningDate, setJoiningDate] = useState('27 Oct 2024');
-  const [membershipTier, setMembershipTier] = useState('Yearly Elite All-Access @ ₹19,999');
+  const [membershipTier, setMembershipTier] = useState('No membership selected');
   const [batchSlot, setBatchSlot] = useState('Evening Peak (05:00 PM – 09:30 PM)');
   const [lockerAllocation, setLockerAllocation] = useState('Locker #102 (Middle Tier - RFID)');
   const [fitnessGoal, setFitnessGoal] = useState('Goal: Hypertrophy & core stability. No cardiovascular limitations. PT requested for intake posture screening.');
