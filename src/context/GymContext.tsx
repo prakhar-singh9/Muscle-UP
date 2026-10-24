@@ -256,6 +256,35 @@ export const GymProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     return newMember;
   };
 
+  const registerMember = async (data: Partial<Member>): Promise<Member> => {
+    if (!isSupabaseConfigured) return addMember(data);
+    const row = await createGymMember({
+      full_name: data.name ?? '', phone: data.phone ?? '', email: data.email || null,
+      date_of_birth: data.dob || null, gender: data.gender ?? 'Prefer not',
+      address: data.address || null, emergency_contact_name: data.emergencyContact?.name || null,
+      emergency_contact_relationship: data.emergencyContact?.relationship || null,
+      emergency_contact_phone: data.emergencyContact?.phone || null,
+      fitness_goal: data.fitnessGoal || null, preferred_slot: data.preferredSlot || null,
+      locker_number: data.lockerNo || null, assigned_trainer: data.assignedTrainer || null,
+      branch: data.branch || currentBranch, notes: data.notes || null,
+    });
+    const created: Member = {
+      id: row.id, numericId: String(row.member_number), name: row.full_name, gender: row.gender,
+      phone: row.phone, email: row.email ?? '', dob: row.date_of_birth ?? undefined,
+      joinedDate: new Date(row.created_at).toLocaleDateString('en-IN'), status: 'expired',
+      planTier: 'No membership', planName: 'No membership', planPrice: 0,
+      paymentMethod: 'Not recorded', paymentState: 'PENDING', expiryDate: 'No membership',
+      daysRemaining: 0, startDate: new Date(row.created_at).toLocaleDateString('en-IN'),
+      emergencyContact: { name: row.emergency_contact_name ?? '', phone: row.emergency_contact_phone ?? '', relationship: row.emergency_contact_relationship ?? undefined },
+      address: row.address ?? undefined, fitnessGoal: row.fitness_goal ?? undefined,
+      lifetimeVisits: 0, complianceRate: 0, preferredSlot: row.preferred_slot ?? 'Not set', branch: row.branch,
+      lockerNo: row.locker_number ?? undefined, assignedTrainer: row.assigned_trainer ?? undefined,
+      notes: row.notes ?? undefined, accessGranted: false,
+    };
+    setMembers(prev => [created, ...prev]);
+    return created;
+  };
+
   const updateMember = (id: string, updates: Partial<Member>) => {
     setMembers(prev => prev.map(m => m.id === id ? { ...m, ...updates } : m));
   };
