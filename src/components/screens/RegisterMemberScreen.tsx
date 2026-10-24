@@ -38,12 +38,12 @@ export const RegisterMemberScreen: React.FC = () => {
   const [fullName, setFullName] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
-  const [dob, setDob] = useState('1994-08-14');
+  const [dob, setDob] = useState('');
   const [gender, setGender] = useState<'Male' | 'Female' | 'Other' | 'Prefer not'>('Male');
 
-  const [address, setAddress] = useState('Flat 402, Skyline Residency, 12th Main Indiranagar, Bengaluru, PIN: 560038');
-  const [emergencyName, setEmergencyName] = useState('Kavita Kapoor (Spouse)');
-  const [emergencyPhone, setEmergencyPhone] = useState('98111 22334');
+  const [address, setAddress] = useState('');
+  const [emergencyName, setEmergencyName] = useState('');
+  const [emergencyPhone, setEmergencyPhone] = useState('');
 
   const [joiningDate, setJoiningDate] = useState('27 Oct 2024');
   const [membershipTier, setMembershipTier] = useState('Yearly Elite All-Access @ ₹19,999');
