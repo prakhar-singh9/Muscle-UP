@@ -4,6 +4,7 @@
  */
 
 import React from 'react';
+import { AdminAuthGate, AdminAuthProvider } from './auth/AdminAuth';
 import { GymProvider, useGym } from './context/GymContext';
 import { Sidebar } from './components/layout/Sidebar';
 import { TopHeader } from './components/layout/TopHeader';
@@ -57,8 +58,12 @@ const AppContent: React.FC = () => {
 
 export default function App() {
   return (
-    <GymProvider>
-      <AppContent />
-    </GymProvider>
+    <AdminAuthProvider>
+      <AdminAuthGate>
+        <GymProvider>
+          <AppContent />
+        </GymProvider>
+      </AdminAuthGate>
+    </AdminAuthProvider>
   );
 }

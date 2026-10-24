@@ -11,10 +11,12 @@ import {
   Dumbbell
 } from 'lucide-react';
 import { useGym } from '../../context/GymContext';
+import { useAdminAuth } from '../../auth/AdminAuth';
 import { ScreenType } from '../../types';
 
 export const Sidebar: React.FC = () => {
   const { currentScreen, setCurrentScreen } = useGym();
+  const { profile, user, signOut } = useAdminAuth();
 
   const navItems: { id: ScreenType; label: string; icon: React.ReactNode }[] = [
     { id: 'dashboard', label: 'Dashboard', icon: <LayoutDashboard className="w-5 h-5" /> },
@@ -91,22 +93,22 @@ export const Sidebar: React.FC = () => {
       <div className="p-3 border-t border-slate-800/90 bg-[#081524]">
         <div className="flex items-center justify-between px-2 py-1.5 rounded-lg hover:bg-slate-800/50 transition-colors">
           <div className="flex items-center gap-3 min-w-0">
-            <img
-              src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80"
-              alt="Rahul Verma"
-              className="w-9 h-9 rounded-full object-cover border border-[#65a30d]/50"
-            />
+            <div className="w-9 h-9 rounded-full bg-lime-600 flex items-center justify-center text-white font-bold border border-[#65a30d]/50" aria-hidden="true">
+              {(profile?.full_name || user?.email || 'A').trim().charAt(0).toUpperCase()}
+            </div>
             <div className="min-w-0">
               <div className="text-sm font-bold text-white truncate font-jakarta">
-                Rahul Verma
+                {profile?.full_name || user?.email || 'Administrator'}
               </div>
               <div className="text-[11px] text-slate-400 truncate">
-                Gym Administrator
+                Administrator
               </div>
             </div>
           </div>
-          <button 
-            title="Log out / Switch User"
+          <button
+            title="Sign out"
+            aria-label="Sign out"
+            onClick={() => { void signOut(); }}
             className="p-1.5 text-slate-400 hover:text-white rounded hover:bg-slate-700/50 transition-colors"
           >
             <LogOut className="w-4 h-4" />
