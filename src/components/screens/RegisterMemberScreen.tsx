@@ -184,16 +184,16 @@ export const RegisterMemberScreen: React.FC = () => {
           </div>
           <div>
             <div className="font-bold text-slate-900 font-jakarta">
-              Staff Tip: WhatsApp Gateway Active
+              {isSupabaseConfigured ? 'Messaging integration not connected' : 'Staff Tip: Demo messaging status'}
             </div>
             <p className="text-slate-600 mt-0.5 leading-snug">
-              Verify Indian mobile number for automated WhatsApp expiry reminders, welcome PDF locker pin, and tax invoice generation.
+              {isSupabaseConfigured ? 'WhatsApp/SMS reminders, welcome messages, and tax invoice delivery are not connected yet. No messages will be sent from this form.' : 'This is demo UI only. No real WhatsApp/SMS messages are sent.'}
             </p>
           </div>
         </div>
         <div className="shrink-0 flex items-center gap-1.5 text-[#65a30d] font-bold bg-white px-3 py-1 rounded-full border border-lime-200 shadow-2xs">
           <span>✓</span>
-          <span>SMS/WA Sync Enabled</span>
+          <span>{isSupabaseConfigured ? 'Not connected' : 'Demo only'}</span>
         </div>
       </div>
 
