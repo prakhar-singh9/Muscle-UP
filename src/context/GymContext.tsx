@@ -49,7 +49,6 @@ interface GymContextType {
 
   // Actions
   addMember: (member: Partial<Member>) => Member;
-  registerMember: (member: Partial<Member>) => Promise<Member>;
   updateMember: (id: string, updates: Partial<Member>) => void;
   renewMembership: (params: {
     memberId: string;
